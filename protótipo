@@ -1,0 +1,187 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include <locale.h>
+#include<string.h>
+#define TAM 10
+
+
+typedef struct dados{
+        int numero;
+        char local[7];
+        char descricao [300];
+        int codigo;
+        } chamados;
+        
+        
+void exibicao(void){
+    
+    printf("\tmicro - \tcodigo - \t[100]\n \ttoken - \tcodigo - \t[101]\n \trede - \t        codigo - \t[102]\n \te-mail - \tcodigo - \t[103]\n ");
+    printf("\tMonitor - \tcodigo - \t[104]\n \tCx de Som - \tcodigo - \t[105]\n \tapolo - \tcodigo - \t[106]\n \tPerfil - \tcodigo - \t[107]\n  ");
+    printf("\tnotebook - \tcodigo - \t[108]\n \tGo-Global - \tcodigo - \t[109]\n \tRemanejamento - \tcodigo - \t[110]\n");
+    
+    
+}
+        
+        
+int  descricao_chamado (chamados cod){
+	chamados x;
+    x.codigo=cod.codigo;
+    switch (cod.codigo){
+        case 100:
+            printf("Micro não Liga\n");
+            break;
+        case 101:
+             printf("token\n");
+             break;
+        case 102:
+             printf("não conecta a rede\n");
+             break;
+        case 103:
+             printf("e-mail");
+             break;
+        case 104:
+             printf("Monitor não liga\n");
+             break;
+        case 105:
+             printf("Cx de som\n");
+             break;
+        case 106:
+             printf("Apolo\n");
+             break;
+        case 107:
+             printf("Perfil\n");
+             break;
+        case 108:
+             printf("notebook\n");
+             break;
+        case 109:
+             printf("Go-global\n");
+             break;
+        case 110:
+             printf("Remanejamento\n");
+             break;
+    	case 000:
+    		 printf("Tchau\n");
+            // system("pause");
+             return x.codigo;
+        default :
+            printf("digite um código correto\n");
+        }
+        
+		return x.codigo;      
+            
+}
+
+
+FILE* AbreArquivo (char modo, char caminho[30]){
+	FILE *arquivo;
+	switch(modo){
+		case 'g':
+			arquivo=fopen(caminho,"wt");
+			break;
+		case'l':
+			arquivo = fopen(caminho,"rt");
+			break;
+		case 'a':
+			arquivo = fopen(caminho,"a");
+			break;
+			
+	}
+	if(arquivo==NULL){
+		printf("nao foi possivel abrir o arquivo");
+		exit(0);
+	}
+}
+
+void FecharArquivo (FILE *arquivo){
+	fclose(arquivo);
+}
+
+
+
+void Listar (){
+	FILE *arquivo;
+    chamados lista;
+
+    arquivo = AbreArquivo('l',"agenda.txt");
+
+    while(!feof(arquivo)){
+        fscanf(arquivo,"%s ",lista.codigo);
+        printf("codigo do chamado",lista.codigo);
+    }
+    FecharArquivo(arquivo);
+}
+
+
+
+int preenche_vetor (chamados vet[TAM], chamados y){
+	int i;
+	
+	for(i=0;i<TAM;i++){
+		
+		if(vet[i].codigo==NULL){
+			vet[i].codigo=y.codigo;
+			break;
+		}
+		/*else if (vet[i].codigo=!0){
+			for(i=0;i<TAM;i++){
+					if(vet[i].codigo==0){
+					  vet[i].codigo=y.codigo;
+			       }
+			}
+		}*/
+			
+		
+		
+			
+	}	
+		
+		
+	}
+	// função de exibição ,
+	void exibe_vetor (chamados vet[TAM]){
+		int i;
+		
+		for(i=0;i<TAM;i++){
+			printf ("%d\n",vet[i].codigo);
+		}
+		
+		
+	}
+	
+	// função para zerar vetor
+void zera_vet (chamados vet[TAM]){
+	int i;
+	
+	for(i=0;i<TAM;i++){
+		vet[i].codigo=0;
+		break;
+	}
+}
+
+  
+
+       
+     
+int main (void){
+    chamados codi[TAM];
+    chamados tipo;
+    chamados x;
+
+    setlocale(LC_ALL, "Portuguese");
+     
+    exibicao();
+    zera_vet(codi); 
+    do{
+    	printf("digite o codigo do chamado\n");
+    	scanf("%d",&tipo.codigo);
+		x.codigo=descricao_chamado(tipo);
+		preenche_vetor(codi,x);
+	
+		}while(x.codigo !=000);
+		
+		exibe_vetor(codi);
+		
+    system("pause");
+    return 0;
+}
